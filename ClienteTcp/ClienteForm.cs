@@ -29,29 +29,29 @@ namespace ClienteTcp
 
             try
             {
-                // Create a TcpClient.
-                // Note, for this client to work you need to have a TcpServer 
-                // connected to the same address as specified by the server, port
-                // combination.
-
                 Int32 port = 5000;
                 TcpClient client = new TcpClient(server, port);
                 Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
 
-                // Get a client stream for reading and writing.
-                //  Stream stream = client.GetStream();
+
+
 
                 NetworkStream stream = client.GetStream();
 
                 // Send the message to the connected TcpServer. 
                 stream.Write(data, 0, data.Length);
-
-                Console.WriteLine("Sent: {0}", message);
-
+                if (textmanda.InvokeRequired)
+                {
+                    textmanda.Invoke((MethodInvoker)delegate { textmanda.Text = sendBox.Text; });
+                }
+                else
+                {
+                    textmanda.Text = sendBox.Text;
+                }
                 // Receive the TcpServer.response.
 
                 // Buffer to store the response bytes.
-                data = new Byte[256];
+                data = new Byte[1024];
 
                 // String to store the response ASCII representation.
                 String responseData = String.Empty;
@@ -59,14 +59,16 @@ namespace ClienteTcp
                 // Read the first batch of the TcpServer response bytes.
                 Int32 bytes = stream.Read(data, 0, data.Length);
                 responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
-                Console.WriteLine("Received: {0}", responseData);
-
+                if (textrecibe.InvokeRequired)
+                {
+                    textrecibe.Invoke((MethodInvoker)delegate { textrecibe.Text = responseData; });
+                }
+                else
+                {
+                    textrecibe.Text = responseData;
+                }
                 // Close everything.
                 stream.Close();
-
-
-
-
                 client.Close();
             }catch (SocketException e)
             {
@@ -82,7 +84,7 @@ namespace ClienteTcp
         {
             if (sendBox.Text != string.Empty)
             {
-                Connect("127.0.0.1");
+                Connect("172.17.20.73",sendBox.Text);
             }
             else {
                 MessageBox.Show("tiendes que escribir algo en el textbox");
