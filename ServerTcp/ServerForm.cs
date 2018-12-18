@@ -26,6 +26,7 @@ namespace ServerTcp
             Thread serverThread = new Thread(ServerOn);
             serverThread.SetApartmentState(ApartmentState.STA);
             serverThread.Start();
+
         }
 
         private void ServerOn()
@@ -94,19 +95,18 @@ namespace ServerTcp
 
 
                                 // Process the data sent by the client.
-                                data = "Por la alianza!!";
 
-                                byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
+                                byte[] msg = System.Text.Encoding.ASCII.GetBytes(leerArchivos());
 
                                 // Send back a response.
                                 stream.Write(msg, 0, msg.Length);
                                 if (textmanda.InvokeRequired)
                                 {
-                                    textmanda.Invoke((MethodInvoker)delegate { textmanda.Text = data; });
+                                    textmanda.Invoke((MethodInvoker)delegate { textmanda.Text = leerArchivos(); });
                                 }
                                 else
                                 {
-                                    textmanda.Text = data;
+                                    textmanda.Text = leerArchivos();
                                 }
                             }
 
@@ -119,14 +119,23 @@ namespace ServerTcp
                 {
                     Console.WriteLine("SocketException: {0}", e);
                 }
-               
-                
-
-
-
+         
             }
         }
-        
+         private string leerArchivos()
+        {
+            string line;
+            string total = null;
+            // Read the file and display it line by line.  
+            StreamReader file = new StreamReader(@"C:\Users\admin\source\repos\PACS\dll\codigos.txt");
+            while ((line = file.ReadLine()) != null)
+            {
+                total = total + "\n" + line;
+
+            }
+            file.Close();
+            return total;
+        }
     }
 }
 
