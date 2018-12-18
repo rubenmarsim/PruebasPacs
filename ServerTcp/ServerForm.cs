@@ -39,7 +39,6 @@ namespace ServerTcp
                 Listener = new TcpListener(localAddr, port);
                 Listener.Start();
                 Byte[] bytes = new Byte[1024];
-                String data = null;
             }
             catch (Exception ex)
             {
