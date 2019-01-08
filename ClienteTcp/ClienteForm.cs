@@ -84,7 +84,7 @@ namespace ClienteTcp
         {
             if (sendBox.Text != string.Empty)
             {
-                Connect("172.17.20.73",sendBox.Text);
+                Connect("172.17.20.204",sendBox.Text);
             }
             else {
                 MessageBox.Show("tiendes que escribir algo en el textbox");
