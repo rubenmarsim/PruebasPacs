@@ -63,8 +63,8 @@ namespace ServerTcp
                             statusLabel.Text = "Connected client\n";
                         }
 
-                            client.Close();
-                        }
+                        client.Close();
+                    }
                 }catch (SocketException e)
                 {
                     Console.WriteLine("SocketException: {0}", e);
