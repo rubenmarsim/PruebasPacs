@@ -14,7 +14,7 @@ namespace ClienteTcp
 {
     public partial class ClienteForm : Form
     {
-
+        const string _IP = "127.0.0.1";
         public ClienteForm()
         {
             InitializeComponent();
@@ -80,11 +80,17 @@ namespace ClienteTcp
            
         }
 
+        /// <summary>
+        /// Cuando pulsamos el boton de conectar revisamos que el textbox no este vacio
+        /// si lo esta tenemos el messagebox y sino mandamos el mensaje
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonConnect_Click(object sender, EventArgs e)
         {
             if (sendBox.Text != string.Empty)
             {
-                Connect("172.17.20.73",sendBox.Text);
+                Connect(_IP,sendBox.Text);
             }
             else {
                 MessageBox.Show("tiendes que escribir algo en el textbox");

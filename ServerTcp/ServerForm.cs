@@ -15,6 +15,7 @@ namespace ServerTcp
 {
     public partial class ServerForm : Form
     {
+        const string _IP = "127.0.0.1";
         public ServerForm()
         {
             InitializeComponent();
@@ -36,7 +37,7 @@ namespace ServerTcp
             try
             {
                 Int32 port = 5000;
-                IPAddress localAddr = IPAddress.Parse("172.17.20.73");
+                IPAddress localAddr = IPAddress.Parse(_IP);
                 Listener = new TcpListener(localAddr, port);
                 Listener.Start();
                 Byte[] bytes = new Byte[1024];
@@ -126,8 +127,8 @@ namespace ServerTcp
         {
             string line;
             string total = null;
-            // Read the file and display it line by line.  
-            StreamReader file = new StreamReader(@"C:\Users\admin\source\repos\PACS\dll\codigos.txt");
+            // Read the file and display it line by line.
+            StreamReader file = new StreamReader(@"codigos.txt");
             while ((line = file.ReadLine()) != null)
             {
                 total = total + "\n" + line;
