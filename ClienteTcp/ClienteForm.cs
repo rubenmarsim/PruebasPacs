@@ -22,7 +22,7 @@ namespace ClienteTcp
 
         private void ClienteForm_Load(object sender, EventArgs e)
         {
-            Connect("172.17.20.73");
+            Connect("127.0.0.1");
         }
 
         void Connect(String server)
